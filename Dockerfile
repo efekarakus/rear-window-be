@@ -1,6 +1,6 @@
 # We specify the base image we need for our
 # go application
-FROM golang:1.13 as build
+FROM golang:1.13-buster as build
 # We create an /app directory within our
 # image that will hold our application source
 # files
@@ -20,8 +20,8 @@ RUN go build -o emoji-detective ./pkg
 # our newly created binary executable
 
 # Now copy it into our base image.
-# FROM gcr.io/distroless/base-debian10
-# COPY --from=build /app/emoji-detective /
+FROM gcr.io/distroless/base-debian10
+COPY --from=build /app/emoji-detective /
 
 CMD ["./emoji-detective"]
 
