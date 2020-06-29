@@ -1,0 +1,25 @@
+Parameters:
+  Project:
+    Type: String
+    Description: Your project name.
+  Env:
+    Type: String
+    Description: The environment name your application is being deployed to.
+  App:
+    Type: String
+    Description: The name of the application being deployed.
+Resources:
+  AdditionalResourcesPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Effect: Allow
+          Action:
+          - "rekognition:DetectLabels"
+          Resource: "*"
+Outputs:
+  AdditionalResourcesPolicyArn:
+  Description: ARN of the policy to access additional resources from.
+  Value: !Ref AdditionalResourcesPolicy
